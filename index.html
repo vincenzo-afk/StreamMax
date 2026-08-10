@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StreamMax — Unlimited Movies &amp; TV Shows</title>
+<meta name="description" content="StreamMax — watch trending movies and TV shows." />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="brand" id="brandLink">
+        <img src="assets/logo.png" alt="StreamMax" class="brand-logo" />
+        <span class="brand-name">Stream<em>Max</em></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#" class="nav-link active" data-view="home">Home</a>
+        <a href="#" class="nav-link" data-view="movies">Movies</a>
+        <a href="#" class="nav-link" data-view="tv">TV Shows</a>
+        <a href="#" class="nav-link" data-view="airing">On Air Today</a>
+        <a href="#" class="nav-link" data-view="mylist">My List</a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="search-wrap" id="searchWrap">
+        <button class="icon-btn" id="searchToggle" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        </button>
+        <input type="text" id="searchInput" class="search-input" placeholder="Titles, people, genres" autocomplete="off" />
+      </div>
+      <span class="eyebrow-tag" id="clockTag"></span>
+      <div class="profile-badge" title="Profile">SM</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="hero" class="hero">
+  <div class="hero-media">
+    <img id="heroBackdrop" class="hero-backdrop" alt="" />
+    <div class="hero-gradient-bottom"></div>
+    <div class="hero-gradient-left"></div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-eyebrow" id="heroEyebrow">Featured Today</span>
+    <h1 class="hero-title" id="heroTitle">Loading StreamMax…</h1>
+    <div class="hero-meta" id="heroMeta"></div>
+    <p class="hero-overview" id="heroOverview"></p>
+    <div class="hero-actions">
+      <button class="btn btn-play" id="heroPlayBtn">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+        Play Trailer
+      </button>
+      <button class="btn btn-info" id="heroInfoBtn">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/></svg>
+        More Info
+      </button>
+      <button class="btn btn-add" id="heroAddBtn" title="Add to My List">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MAIN ================= -->
+<main id="main">
+
+  <div id="searchResultsView" class="rail-section hidden">
+    <div class="rail-head">
+      <h2 class="rail-title">Results for “<span id="searchQueryLabel"></span>”</h2>
+    </div>
+    <div id="searchGrid" class="poster-grid"></div>
+    <p id="searchEmpty" class="empty-msg hidden">No matches found. Try a different title.</p>
+  </div>
+
+  <div id="rowsContainer"></div>
+
+  <div id="myListView" class="rail-section hidden">
+    <div class="rail-head">
+      <h2 class="rail-title">My List</h2>
+    </div>
+    <div id="myListGrid" class="poster-grid"></div>
+    <p id="myListEmpty" class="empty-msg hidden">Your list is empty. Tap the <strong>+</strong> on any title to save it here.</p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <img src="assets/logo.png" class="footer-logo" alt="StreamMax" />
+    <p>StreamMax is a demo streaming interface. Metadata &amp; artwork courtesy of
+      <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDb</a> and
+      <a href="https://www.tvmaze.com/" target="_blank" rel="noopener">TVmaze</a>. Not for commercial use.</p>
+  </div>
+</footer>
+
+<!-- ================= DETAIL MODAL ================= -->
+<div id="modalOverlay" class="modal-overlay hidden">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div class="modal-media">
+      <img id="modalBackdrop" class="modal-backdrop" alt="" />
+      <div class="modal-media-gradient"></div>
+      <button class="modal-play-overlay" id="modalPlayOverlay">
+        <svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2 id="modalTitle" class="modal-title"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-genres" id="modalGenres"></div>
+      <p class="modal-overview" id="modalOverview"></p>
+      <div class="modal-actions">
+        <button class="btn btn-play" id="modalPlayBtn">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+          Play Trailer
+        </button>
+        <button class="btn btn-add-outline" id="modalAddBtn">+ My List</button>
+      </div>
+      <div id="modalCast" class="modal-cast"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TRAILER MODAL ================= -->
+<div id="trailerOverlay" class="trailer-overlay hidden">
+  <button class="modal-close trailer-close" id="trailerClose" aria-label="Close">&times;</button>
+  <div class="trailer-frame-wrap">
+    <iframe id="trailerFrame" src="" title="Trailer" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <p id="trailerFallback" class="trailer-fallback hidden">No trailer is available for this title yet.</p>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
